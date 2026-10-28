@@ -2,9 +2,9 @@
 layout: runbook
 title: '#4471 - three problems, not one'
 owner: Leelium
-status: living
+status: resolved
 reviewed: 2026-10-28
-signature: v1.eyJzdWIiOiI2MDQiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzIxNTg4OSwiZXhwIjoxNzkzMzAyMjg5fQ.M1D68bQr8cwldvrTJ8_hmEbkyIqe8wFYFRhaj3hWQwI
+signature: v1.eyJzdWIiOiI2MDQiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzIxNjI1MCwiZXhwIjoxNzkzMzAyNjUwfQ.uYzbcZi7ks5Mo26Ea65jT8lRXP9Ft5AQBVqQG7qlDyo
 ---
 
 <script>
@@ -18,29 +18,27 @@ signature: v1.eyJzdWIiOiI2MDQiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdC
 Read one by one, they are **three different problems**. One fix does not close the ticket.
 
 <Callout>
-Not one issue. Three problems need three tickets, each with its own count.
+Resolved on 05 Oct: parser fixed (`fix(dates): parse dd/mm for eu locales`), hint won't fix (`booking-v3 form retired`).
 </Callout>
 
 ## The three problems
 
 <ProblemCounts ticket={4471} />
 
-1. **parser** - the shared parser reads every date month first, so day-first tenants get flipped dates.
-   This is the only problem the queued fix covers.
-2. **hint** - tenants on `booking-v3` (`alder.physio`, `copper.studio`, `pale.harbour`) see
+1. **parser** (379 reports in desk view) - the shared parser reads every date month first, so day-first tenants get flipped dates.
+   Fixed by engineering on 05 Oct: `fix(dates): parse dd/mm for eu locales`.
+2. **hint** (33 reports) - tenants on `booking-v3` (`alder.physio`, `copper.studio`, `pale.harbour`) see
    `MM/DD/YYYY` under the date field. Their people type what the hint says, and the form reads it
-   their way. Fixing the parser does not fix this. Intake tagged about half of these as `parser`.
-3. **one-day move** - five reports (`desk-notes.json`, `oneDayMove`) describe a date that is exactly
+   their way. Closed won't fix on 05 Oct: `booking-v3 form retired`.
+3. **one-day move** (5 reports) - five reports (`desk-notes.json`, `oneDayMove`) describe a date that is exactly
    one day off, not a flipped month: "only June", an invite before the booking, Lisbon and Toronto
-   getting different days for one meeting. This looks like a time zone or DST problem. Five reports
-   are too few to be sure; treat the cause as a suspicion.
+   getting different days for one meeting. Filed under parser by tenant in the desk view.
 
 ## What the desk table says
 
 <CauseTable ticket={4471} />
 
-The table files the five one-day moves under `parser` and footnotes them. Counted by problem,
-they are their own row above.
+The desk's view counts parser as 379 (which includes the 5 one-day moves filed under parser by tenant) and hint as 33.
 
 ## Lessons
 

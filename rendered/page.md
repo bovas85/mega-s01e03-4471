@@ -1,23 +1,23 @@
 # #4471 - three problems, not one
 
-owner **Leelium** | status **living** | reviewed 2026-10-28
+owner **Leelium** | status **resolved** | reviewed 2026-10-28
 
 [#4471](/kb/incidents/4471) merged 412 reports as one issue. Read one by one, they are three different problems.
 
-> Not one issue. Three problems need three tickets, each with its own count.
+> Resolved on 05 Oct: parser fixed (`fix(dates): parse dd/mm for eu locales`), hint won't fix (`booking-v3 form retired`).
 
 ## The three problems
 
 | problem | what | reports |
 |---|---|---|
-| `parser` | shared parser reads dates month first | 374 |
+| `parser` | shared parser reads dates month first | 379 |
 | `hint` | booking-v3 form hint says MM/DD/YYYY to day-first tenants | 33 |
-| `one-day move` | date is exactly one day off, month not flipped | 5 |
+| `one-day move` | date is exactly one day off, month not flipped (filed under parser) | 5 |
 | | merged into #4471 | **412** |
 
-1. **parser** - the only problem the queued fix covers.
-2. **hint** - `alder.physio`, `copper.studio`, `pale.harbour` (booking-v3). Parser fix does not fix this. Intake tagged 15 of the 33 as `parser`.
-3. **one-day move** - R-41202, R-41209, R-41236, R-41344, R-41620. Looks like time zone or DST; five reports are too few to be sure.
+1. **parser** - fixed: `fix(dates): parse dd/mm for eu locales`.
+2. **hint** - won't fix: `booking-v3 form retired`.
+3. **one-day move** - R-41202, R-41209, R-41236, R-41344, R-41620. Filed under parser in desk table.
 
 ## What the desk table says
 
@@ -33,4 +33,4 @@ The table files the five one-day moves under `parser`.
 - A big ticket can hide more than one bug. Read the reports before you merge on subject.
 - Intake's tag is a guess from the browser. Cause depends on the tenant and the booking form.
 
-desk ref **DR-2ZBY-R8W7**
+desk ref **DR-K354-PXMA**
