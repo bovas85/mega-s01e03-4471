@@ -1,0 +1,51 @@
+---
+layout: runbook
+title: '#4471 - three problems, not one'
+owner: Leelium
+status: living
+reviewed: 2026-10-28
+signature: Leelium
+---
+
+<script>
+  import ProblemCounts from '#lib/kb/ProblemCounts.svelte';
+  import CauseTable from '#lib/kb/CauseTable.svelte';
+  import RenderStamp from '#lib/kb/RenderStamp.svelte';
+  import Callout from '#lib/kb/Callout.svelte';
+</script>
+
+[#4471](/kb/incidents/4471) merged 412 reports as one issue: "the parser reads dates month first".
+Read one by one, they are **three different problems**. One fix does not close the ticket.
+
+<Callout>
+Not one issue. Three problems need three tickets, each with its own count.
+</Callout>
+
+## The three problems
+
+<ProblemCounts ticket={4471} />
+
+1. **parser** - the shared parser reads every date month first, so day-first tenants get flipped dates.
+   This is the only problem the queued fix covers.
+2. **hint** - tenants on `booking-v3` (`alder.physio`, `copper.studio`, `pale.harbour`) see
+   `MM/DD/YYYY` under the date field. Their people type what the hint says, and the form reads it
+   their way. Fixing the parser does not fix this. Intake tagged about half of these as `parser`.
+3. **one-day move** - five reports (`desk-notes.json`, `oneDayMove`) describe a date that is exactly
+   one day off, not a flipped month: "only June", an invite before the booking, Lisbon and Toronto
+   getting different days for one meeting. This looks like a time zone or DST problem. Five reports
+   are too few to be sure; treat the cause as a suspicion.
+
+## What the desk table says
+
+<CauseTable ticket={4471} />
+
+The table files the five one-day moves under `parser` and footnotes them. Counted by problem,
+they are their own row above.
+
+## Lessons
+
+- A big ticket can hide more than one bug. Read the reports before you merge on subject
+  ([decision 0001](/kb/decisions/0001-dedupe-by-subject) merges on subject alone).
+- Intake's tag is a guess from the browser. Cause depends on the tenant and the booking form.
+
+<RenderStamp {signature} />
