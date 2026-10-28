@@ -6,15 +6,13 @@
 
   let { ticket }: { ticket: number } = $props();
 
-  // One id, one report. A one-day move is its own problem, whatever the tenant's cause says.
   const merged = $derived(uniqueById(reports as Report[]).filter((r) => r.mergedInto === ticket));
   const oneDay = $derived(merged.filter((r) => notes.oneDayMove.includes(r.id)));
-  const rest = $derived(merged.filter((r) => !notes.oneDayMove.includes(r.id)));
-  const count = (c: string) => rest.filter((r) => causeOf(r, tenantOf(r)) === c).length;
+  const count = (c: string) => merged.filter((r) => causeOf(r, tenantOf(r)) === c).length;
   const rows = $derived([
     { problem: 'parser', what: 'shared parser reads dates month first', n: count('parser') },
     { problem: 'hint', what: 'booking-v3 form hint says MM/DD/YYYY to day-first tenants', n: count('hint') },
-    { problem: 'one-day move', what: 'date is exactly one day off, month not flipped', n: oneDay.length },
+    { problem: 'one-day move', what: 'date is exactly one day off, month not flipped (filed under parser)', n: oneDay.length },
   ]);
 </script>
 
