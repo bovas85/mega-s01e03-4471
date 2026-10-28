@@ -4,7 +4,7 @@ title: '#4471 - three problems, not one'
 owner: Leelium
 status: living
 reviewed: 2026-10-28
-signature: Leelium
+signature: v1.eyJzdWIiOiI2MDQiLCJhdWQiOiJjaGFsbGVuZ2U6d2hhdC1pdC1zaG93cyIsImlhdCI6MTc5MzIxNTg4OSwiZXhwIjoxNzkzMzAyMjg5fQ.M1D68bQr8cwldvrTJ8_hmEbkyIqe8wFYFRhaj3hWQwI
 ---
 
 <script>
